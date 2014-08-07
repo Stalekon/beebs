@@ -74,7 +74,7 @@ instruction_pool = []
 try:
 	f = open(directory,'r')
 except(IOError):
-	sys.exit("Error opening file. Check if file exists.")
+	sys.exit("Error opening file. Check if file exists. " + directory)
 
 for line in f:
 	if static_analysis:
