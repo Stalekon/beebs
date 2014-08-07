@@ -1,11 +1,10 @@
-# Makefile.am for building a BEEBS benchmark
+# BEEBS GDB auxv test
 #
 # Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-# This file is part of the Bristol/Embecosm Embedded Benchmark Suite
-# Suite.
+# Contributor Jeremy Bennett <jeremy.bennett@embecosm.com>
 #
-# Contributor: James Pallister <james.pallister@bristol.ac.uk>
+# This file is part of the Bristol/Embecosm Embedded Energy Benchmark Suite.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,17 +13,15 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=trio-snprintf
-trio_snprintf_SOURCES=trio.c trio.h trio_test.c triostr.c triostr.h triodef.h triop.h
+bin_PROGRAMS=gdb-auxv
+gdb_auxv_SOURCES=auxv.c
 
 include $(top_srcdir)/src/common.mk.am
 
-AM_CFLAGS += -DTRIO_SNPRINTF_ONLY -DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 -DTRIO_MICROSOFT=0 -DTRIO_ERRORS=0 -DTRIO_FEATURE_FLOAT=0
-
-trio_snprintf_SOURCES += ${platform_src}
+gdb_auxv_SOURCES += ${platform_src}

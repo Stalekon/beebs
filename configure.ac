@@ -31,7 +31,7 @@ AC_CONFIG_AUX_DIR([build-aux])
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
 
-AM_INIT_AUTOMAKE([1.11])
+AM_INIT_AUTOMAKE([1.11 -Wno-portability])
 AM_MAINTAINER_MODE([enable])
 AM_SILENT_RULES([yes])
 
@@ -206,6 +206,7 @@ m4_define([benchmarklist],[dnl
 [float_matmult],
 [frac],
 [gdb-advance],
+[gdb-auxv],
 [gdb-all-types],
 [gdb-anon],
 [gdb-arrayidx],
@@ -264,8 +265,7 @@ m4_define([benchmarklist],[dnl
 [statemate],
 [stb_perlin],
 [tarai],
-[trio-snprintf],
-[trio-sscanf],
+[trio],
 [ud],
 [wikisort],
 [whetstone]])

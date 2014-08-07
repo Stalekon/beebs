@@ -14,14 +14,13 @@
 
 @SET_MAKE@
 
-# Makefile.am for building a BEEBS benchmark
+# BEEBS GDB auxv test
 #
 # Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-# This file is part of the Bristol/Embecosm Embedded Benchmark Suite
-# Suite.
+# Contributor Jeremy Bennett <jeremy.bennett@embecosm.com>
 #
-# Contributor: James Pallister <james.pallister@bristol.ac.uk>
+# This file is part of the Bristol/Embecosm Embedded Energy Benchmark Suite.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,11 +29,11 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 # Common makefile.am fragments for building a BEEBS benchmark
 #
@@ -122,11 +121,11 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = trio-sscanf$(EXEEXT)
+bin_PROGRAMS = gdb-auxv$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 @CHIPSUPPORT_C_TRUE@am__append_1 = $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-subdir = src/trio-sscanf
+subdir = src/gdb-auxv
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -140,16 +139,14 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__trio_sscanf_SOURCES_DIST = trio.c trio.h trio_test.c triostr.c \
-	triostr.h triodef.h triop.h \
+am__gdb_auxv_SOURCES_DIST = auxv.c \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @CHIPSUPPORT_C_TRUE@am__objects_1 = chipsupport.$(OBJEXT)
 am__objects_2 = boardsupport.$(OBJEXT) $(am__objects_1)
-am_trio_sscanf_OBJECTS = trio.$(OBJEXT) trio_test.$(OBJEXT) \
-	triostr.$(OBJEXT) $(am__objects_2)
-trio_sscanf_OBJECTS = $(am_trio_sscanf_OBJECTS)
-trio_sscanf_LDADD = $(LDADD)
+am_gdb_auxv_OBJECTS = auxv.$(OBJEXT) $(am__objects_2)
+gdb_auxv_OBJECTS = $(am_gdb_auxv_OBJECTS)
+gdb_auxv_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -188,8 +185,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(trio_sscanf_SOURCES)
-DIST_SOURCES = $(am__trio_sscanf_SOURCES_DIST)
+SOURCES = $(gdb_auxv_SOURCES)
+DIST_SOURCES = $(am__gdb_auxv_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -344,8 +341,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-trio_sscanf_SOURCES = trio.c trio.h trio_test.c triostr.c triostr.h \
-	triodef.h triop.h ${platform_src}
+gdb_auxv_SOURCES = auxv.c ${platform_src}
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(am__append_1)
@@ -358,16 +354,13 @@ platform_src =  \
 @CALIBRATION_TRUE@	        $(top_srcdir)/config/@ARCH@/boards/@BOARD@/calibration \
 @CALIBRATION_TRUE@		|| echo "0 0") | cut -d " " -f 2
 
-AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS) -I $(top_srcdir)/include \
-	-I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ -I \
-	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
-	"-DCALIB_SCALE=$(shell $(calib))" @CONFIG_CFLAGS@ \
-	-DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 -DTRIO_MICROSOFT=0 \
-	-DTRIO_ERRORS=0 -DTRIO_FEATURE_FLOAT=0 -DTRIO_FEATURE_FILE=0 \
-	-DTRIO_FEATURE_STDIO=0 -DTRIO_FEATURE_FD=0 \
-	-DTRIO_FEATURE_DYNAMICSTRING=0 -DTRIO_FEATURE_CLOSURE=0 \
-	-DTRIO_FEATURE_STRERR=0 -DTRIO_FEATURE_LOCALE=0 \
-	-DTRIO_EMBED_NAN=1 -DTRIO_EMBED_STRING=1
+AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS) \
+		  -I $(top_srcdir)/include \
+		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
+		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
+		  "-DCALIB_SCALE=$(shell $(calib))" \
+		  @CONFIG_CFLAGS@
+
 AM_LDFLAGS = @CONFIG_LDFLAGS@
 all: all-am
 
@@ -382,9 +375,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/trio-sscanf/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/gdb-auxv/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/trio-sscanf/Makefile
+	  $(AUTOMAKE) --gnu src/gdb-auxv/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -454,9 +447,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-trio-sscanf$(EXEEXT): $(trio_sscanf_OBJECTS) $(trio_sscanf_DEPENDENCIES) $(EXTRA_trio_sscanf_DEPENDENCIES) 
-	@rm -f trio-sscanf$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(trio_sscanf_OBJECTS) $(trio_sscanf_LDADD) $(LIBS)
+gdb-auxv$(EXEEXT): $(gdb_auxv_OBJECTS) $(gdb_auxv_DEPENDENCIES) $(EXTRA_gdb_auxv_DEPENDENCIES) 
+	@rm -f gdb-auxv$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gdb_auxv_OBJECTS) $(gdb_auxv_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -464,11 +457,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/auxv.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/boardsupport.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chipsupport.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trio.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trio_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/triostr.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
