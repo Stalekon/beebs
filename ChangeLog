@@ -1,3 +1,374 @@
+2014-08-13  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/nbody/nbody.c: Add GPL header, and original licence and
+	copyright information.
+
+2014-08-13  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/fasta/fasta.c: Add GPL header, and original licence and
+	copyright information.
+
+2014-08-13  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/trio/trio.c: Add GPL header.
+	* src/trio/trio.h: Add GPL header.
+	* src/trio/triodef.h: Add GPL header.
+	* src/trio/triop.h: Add GPL header.
+	* src/trio/triostr.c: Add GPL header.
+	* src/trio/triostr.h: Add GPL header.
+
+2014-08-13  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/cubic/LICENCE: Removed.
+	* src/cubic/Makefile.am (EXTRA_DIST): Removed.
+	* src/cubic/Makefile.in: Regenerate.
+
+2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/cubic/basicmath_small.c: Add GPL header.
+	* src/cubic/cubic.c: Add GPL header.
+	* src/cubic/pi.h: Add GPL header.
+	* src/cubic/snipmath.h: Add GPL header.
+	* src/cubic/sniptype.h: Add GPL header.
+
+2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/compress/compress.c (main): Use SCALE_FACTOR not
+	REPEAT_FACTOR.
+
+2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/platformcode/msp430.s: Add GPL header.
+	* src/platformcode/pic32mx.ld: Add GPL header.
+	* src/platformcode/pic32mx_startup.s: Add GPL header.
+	* src/platformcode/platformcode.h: Add GPL header.
+	* src/platformcode/sam4lxplained.ld: Add GPL header.
+	* src/platformcode/startup.S: Add GPL header.
+	* src/platformcode/startup.c: Add GPL header.
+	* src/platformcode/stm32f05_flash.ld: Add GPL header.
+	* src/platformcode/stm32vl_flash.ld: Add GPL header.
+
+2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* Makefile.am: Remove duplicate 'Suite' in header comment.
+	* analysis/Makefile.am: Likewise.
+	* src/2dfir/Makefile.am: Likewise.
+	* src/adpcm/Makefile.am: Likewise.
+	* src/aha-compress/Makefile.am: Likewise.
+	* src/aha-mont64/Makefile.am: Likewise.
+	* src/bs/Makefile.am: Likewise.
+	* src/bubblesort/Makefile.am: Likewise.
+	* src/cnt/Makefile.am: Likewise.
+	* src/compress/Makefile.am: Likewise.
+	* src/cover/Makefile.am: Likewise.
+	* src/crc/Makefile.am: Likewise.
+	* src/ctl-string/Makefile.am: Likewise.
+	* src/ctl/Makefile.am: Likewise.
+	* src/dhrystone/Makefile.am: Likewise.
+	* src/dtoa/Makefile.am: Likewise.
+	* src/duff/Makefile.am: Likewise.
+	* src/edn/Makefile.am: Likewise.
+	* src/expint/Makefile.am: Likewise.
+	* src/fac/Makefile.am: Likewise.
+	* src/fasta/Makefile.am: Likewise.
+	* src/fdct/Makefile.am: Likewise.
+	* src/fft/Makefile.am: Likewise.
+	* src/fibcall/Makefile.am: Likewise.
+	* src/fir/Makefile.am: Likewise.
+	* src/frac/Makefile.am: Likewise.
+	* src/huffbench/Makefile.am: Likewise.
+	* src/insertsort/Makefile.am: Likewise.
+	* src/janne_complex/Makefile.am: Likewise.
+	* src/jfdctint/Makefile.am: Likewise.
+	* src/lcdnum/Makefile.am: Likewise.
+	* src/levenshtein/Makefile.am: Likewise.
+	* src/lms/Makefile.am: Likewise.
+	* src/ludcmp/Makefile.am: Likewise.
+	* src/matmult/Makefile.am: Likewise.
+	* src/mergesort/Makefile.am: Likewise.
+	* src/miniz/Makefile.am: Likewise.
+	* src/minver/Makefile.am: Likewise.
+	* src/nbody/Makefile.am: Likewise.
+	* src/ndes/Makefile.am: Likewise.
+	* src/nettle-arcfour/Makefile.am: Likewise.
+	* src/nettle-cast128/Makefile.am: Likewise.
+	* src/nettle-des/Makefile.am: Likewise.
+	* src/nettle-md5/Makefile.am: Likewise.
+	* src/newlib-exp/Makefile.am: Likewise.
+	* src/newlib-log/Makefile.am: Likewise.
+	* src/newlib-mod/Makefile.am: Likewise.
+	* src/newlib-sqrt/Makefile.am: Likewise.
+	* src/ns/Makefile.am: Likewise.
+	* src/nsichneu/Makefile.am: Likewise.
+	* src/picojpeg/Makefile.am: Likewise.
+	* src/platformcode/Makefile.am: Likewise.
+	* src/prime/Makefile.am: Likewise.
+	* src/qrduino/Makefile.am: Likewise.
+	* src/qsort/Makefile.am: Likewise.
+	* src/qurt/Makefile.am: Likewise.
+	* src/recursion/Makefile.am: Likewise.
+	* src/select/Makefile.am: Likewise.
+	* src/sglib-arraybinsearch/Makefile.am: Likewise.
+	* src/sglib-arraysort/Makefile.am: Likewise.
+	* src/sglib-dllist/Makefile.am: Likewise.
+	* src/sglib-hashtable/Makefile.am: Likewise.
+	* src/sglib-listinsertsort/Makefile.am: Likewise.
+	* src/sglib-listsort/Makefile.am: Likewise.
+	* src/sglib-queue/Makefile.am: Likewise.
+	* src/sglib-rbtree/Makefile.am: Likewise.
+	* src/slre/Makefile.am: Likewise.
+	* src/sqrt/Makefile.am: Likewise.
+	* src/st/Makefile.am: Likewise.
+	* src/statemate/Makefile.am: Likewise.
+	* src/stb_perlin/Makefile.am: Likewise.
+	* src/stringsearch1/Makefile.am: Likewise.
+	* src/strstr/Makefile.am: Likewise.
+	* src/tarai/Makefile.am: Likewise.
+	* src/template/Makefile.am: Likewise.
+	* src/trio/Makefile.am: Likewise.
+	* src/ud/Makefile.am: Likewise.
+	* src/whetstone/Makefile.am: Likewise.
+	* src/wikisort/Makefile.am: Likewise.
+	* Makefile.in: Regenerate.
+	* src/2dfir/Makefile.in: Regenerate.
+	* src/adpcm/Makefile.in: Regenerate.
+	* src/aha-compress/Makefile.in: Regenerate.
+	* src/aha-mont64/Makefile.in: Regenerate.
+	* src/bs/Makefile.in: Regenerate.
+	* src/bubblesort/Makefile.in: Regenerate.
+	* src/cnt/Makefile.in: Regenerate.
+	* src/compress/Makefile.in: Regenerate.
+	* src/cover/Makefile.in: Regenerate.
+	* src/crc/Makefile.in: Regenerate.
+	* src/ctl-string/Makefile.in: Regenerate.
+	* src/ctl/Makefile.in: Regenerate.
+	* src/dhrystone/Makefile.in: Regenerate.
+	* src/dtoa/Makefile.in: Regenerate.
+	* src/duff/Makefile.in: Regenerate.
+	* src/edn/Makefile.in: Regenerate.
+	* src/expint/Makefile.in: Regenerate.
+	* src/fac/Makefile.in: Regenerate.
+	* src/fasta/Makefile.in: Regenerate.
+	* src/fdct/Makefile.in: Regenerate.
+	* src/fft/Makefile.in: Regenerate.
+	* src/fibcall/Makefile.in: Regenerate.
+	* src/fir/Makefile.in: Regenerate.
+	* src/frac/Makefile.in: Regenerate.
+	* src/huffbench/Makefile.in: Regenerate.
+	* src/insertsort/Makefile.in: Regenerate.
+	* src/janne_complex/Makefile.in: Regenerate.
+	* src/jfdctint/Makefile.in: Regenerate.
+	* src/lcdnum/Makefile.in: Regenerate.
+	* src/levenshtein/Makefile.in: Regenerate.
+	* src/lms/Makefile.in: Regenerate.
+	* src/ludcmp/Makefile.in: Regenerate.
+	* src/matmult/Makefile.in: Regenerate.
+	* src/mergesort/Makefile.in: Regenerate.
+	* src/miniz/Makefile.in: Regenerate.
+	* src/minver/Makefile.in: Regenerate.
+	* src/nbody/Makefile.in: Regenerate.
+	* src/ndes/Makefile.in: Regenerate.
+	* src/nettle-arcfour/Makefile.in: Regenerate.
+	* src/nettle-cast128/Makefile.in: Regenerate.
+	* src/nettle-des/Makefile.in: Regenerate.
+	* src/nettle-md5/Makefile.in: Regenerate.
+	* src/newlib-exp/Makefile.in: Regenerate.
+	* src/newlib-log/Makefile.in: Regenerate.
+	* src/newlib-mod/Makefile.in: Regenerate.
+	* src/newlib-sqrt/Makefile.in: Regenerate.
+	* src/ns/Makefile.in: Regenerate.
+	* src/nsichneu/Makefile.in: Regenerate.
+	* src/picojpeg/Makefile.in: Regenerate.
+	* src/platformcode/Makefile.in: Regenerate.
+	* src/prime/Makefile.in: Regenerate.
+	* src/qrduino/Makefile.in: Regenerate.
+	* src/qsort/Makefile.in: Regenerate.
+	* src/qurt/Makefile.in: Regenerate.
+	* src/recursion/Makefile.in: Regenerate.
+	* src/select/Makefile.in: Regenerate.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerate.
+	* src/sglib-arraysort/Makefile.in: Regenerate.
+	* src/sglib-dllist/Makefile.in: Regenerate.
+	* src/sglib-hashtable/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listsort/Makefile.in: Regenerate.
+	* src/sglib-queue/Makefile.in: Regenerate.
+	* src/sglib-rbtree/Makefile.in: Regenerate.
+	* src/slre/Makefile.in: Regenerate.
+	* src/sqrt/Makefile.in: Regenerate.
+	* src/st/Makefile.in: Regenerate.
+	* src/statemate/Makefile.in: Regenerate.
+	* src/stb_perlin/Makefile.in: Regenerate.
+	* src/stringsearch1/Makefile.in: Regenerate.
+	* src/strstr/Makefile.in: Regenerate.
+	* src/tarai/Makefile.in: Regenerate.
+	* src/template/Makefile.in: Regenerate.
+	* src/trio/Makefile.in: Regenerate.
+	* src/ud/Makefile.in: Regenerate.
+	* src/whetstone/Makefile.in: Regenerate.
+	* src/wikisort/Makefile.in: Regenerate.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/sglib-arraybinsearch/sglib.h: Add GPL header.
+	* src/sglib-arraysort/sglib.h: Add GPL header.
+	* src/sglib-dllist/sglib.h: Add GPL header.
+	* src/sglib-hashtable/sglib.h: Add GPL header.
+	* src/sglib-listinsertsort/sglib.h: Add GPL header.
+	* src/sglib-listsort/sglib.h: Add GPL header.
+	* src/sglib-queue/sglib.h: Add GPL header.
+	* src/sglib-rbtree/sglib.h: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* configure.ac: Remove sglib-arraysort1.
+	* configure: Regenerate.
+	* src/sglib-arraysort/Makefile.am: Add support for quick sort and
+	heap sort variants.
+	* src/sglib-arraysort/Makefile.in: Regenerate.
+	* src/sglib-arraysort/arraysort.c (benchmark): Add quick sort and
+	heap sort variants.
+	* src/sglib-arraysort/sglib.h (SGLIB___ARRAY_HEAP_DOWN): Remove
+	unused variable _t_.
+	* src/sglib-arraysort1/Makefile.am: Removed.
+	* src/sglib-arraysort1/arraysort1.c: Removed.
+	* src/sglib-arraysort1/sglib.h: Removed.
+	* src/sglib-arraysort1/Makefile.in: Removed.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/dijkstra/Makefile.in: Regenerate after commit 64e1ea3.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/picojpeg/picojpeg.c: Add GPL header.
+	* src/picojpeg/picojpeg.h: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/nettle-des/keymap.h: Add GPL header.
+	* src/nettle-des/rotors.h: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/miniz/miniz.c: Add GPL header.
+	* src/miniz/miniz.h: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/dijkstra/LICENSE: Removed.
+	* src/dijkstra/Makefile.am: Remove reference to LICENCE file.
+	* src/dijkstra/dijkstra_small.c: Add GPL header, and copy in the
+	original contents of the LICENCE file.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/bs/bs.c: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/ctl/ctl.h: Add GPL header.
+	* src/ctl/stack.h: Add GPL header.
+	* src/ctl/vector.h: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* configure.ac: Remove ctl-stack and ctl-vector, add ctl.
+	* configure: Regenerate.
+	* src/ctl-stack/Makefile.am: Remove.
+	* src/ctl-stack/Makefile.in: Remove.
+	* src/ctl-stack/ctl.h: Remove.
+	* src/ctl-stack/stack.c: Remove.
+	* src/ctl-vector/Makefile.am: Remove.
+	* src/ctl-vector/Makefile.in: Remove.
+	* src/ctl-vector/vector.c: Remove.
+	* src/ctl-vector/ctl.h: Move to src/ctl/ctl.h.
+	* src/ctl-stack/stack.h: Move to src/ctl/stack.h.
+	* src/ctl-vector/vector.h: Move to src/ctl/vector.h.
+	* src/ctl/Makefile.am: New file.
+	* src/ctl/Makefile.in: Generated.
+	* src/ctl/ctl.c New file, merging old stack.c and vector.c.
+	* src/ctl/ctl.h: Moved from src/ctl-vector/ctl.h.
+	* src/ctl/stack.h: Moved from src/ctl-vector/stack.h.
+	* src/ctl/vector.h: Moved from src/ctl-vector/vector.h.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/crc32/LICENSE: Removed.
+	* src/crc32/crc.h: Removed.
+	* src/crc32/crc_32.c: Add licence information originally from
+	LICENCE, add a GPL header.  Add in contents of header file.
+	(updateCRC32): Remove, unused.
+	* src/crc32/Makefile.am: Remove crc.h and LICENCE references.
+	* src/crc32/Makefile.in: Regenerate.
+
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* configure.ac: Remove all the gdb-* tests.
+	* configure: Regenerate.
+	* src/gdb-advance/Makefile.am: Deleted.
+	* src/gdb-advance/Makefile.in: Deleted.
+	* src/gdb-advance/advance.c: Deleted.
+	* src/gdb-all-types/Makefile.am: Deleted.
+	* src/gdb-all-types/Makefile.in: Deleted.
+	* src/gdb-all-types/all-types.c: Deleted.
+	* src/gdb-anon/Makefile.am: Deleted.
+	* src/gdb-anon/Makefile.in: Deleted.
+	* src/gdb-anon/anon.c: Deleted.
+	* src/gdb-arrayidx/Makefile.am: Deleted.
+	* src/gdb-arrayidx/Makefile.in: Deleted.
+	* src/gdb-arrayidx/arrayidx.c: Deleted.
+	* src/gdb-async/Makefile.am: Deleted.
+	* src/gdb-async/Makefile.in: Deleted.
+	* src/gdb-async/async.c: Deleted.
+	* src/gdb-auxv/Makefile.am: Deleted.
+	* src/gdb-auxv/Makefile.in: Deleted.
+	* src/gdb-auxv/auxv.c: Deleted.
+	* src/gdb-bitfields/Makefile.am: Deleted.
+	* src/gdb-bitfields/Makefile.in: Deleted.
+	* src/gdb-bitfields/bitfields.c: Deleted.
+	* src/gdb-constvars/Makefile.am: Deleted.
+	* src/gdb-constvars/Makefile.in: Deleted.
+	* src/gdb-constvars/constvars.c: Deleted.
+	* src/gdb-store/Makefile.am: Deleted.
+	* src/gdb-store/Makefile.in: Deleted.
+	* src/gdb-store/store.c: Deleted.
+
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* configure.ac: Remove sglib-listinsertsort1.
+	* configure: Regenerate.
+	* src/sglib-listinsertsort/Makefile.am: Remove general automake
+	HOWTO comment.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/listinsertsort.c: Copied from old
+	listinsertsort1.
+	* src/sglib-listinsertsort/sglib.h (SGLIB_LIST_LEN): Remove
+	declaraion of _ce_.
+	* src/sglib-listinsertsort1/Makefile.am: Removed.
+	* src/sglib-listinsertsort1/Makefile.in: Removed.
+	* src/sglib-listinsertsort1/listinsertsort1.c: Removed.
+	* src/sglib-listinsertsort1/sglib.h: Removed.
+
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/bubblesort/Makefile.am: Remove bubblesort_quick test.
+	* src/bubblesort/Makefile.in: Regenerate.
+	* src/bubblesort/bubblesort.c (BUBBLESORT_RSHIFT): Remove.
+	(SCALE_FACTOR): No longer rely on BUBBLESORT_RSHIFT.
+
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/fasta/fasta.c (SCALE_FACTOR): Whitespace fixes.
+
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/cubic/basicmath_small.c (SCALE_FACTOR): Remove the +1.
+
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/bubblesort/bubblesort.c: Remove stdio.h include.
+
 2014-08-07  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* configure.ac: Remove int_matmult and float_matmult, add matmult.

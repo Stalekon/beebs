@@ -2,8 +2,7 @@
 #
 # Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-# This file is part of the Bristol/Embecosm Embedded Benchmark Suite
-# Suite.
+# This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 #
 # Contributor: James Pallister <james.pallister@bristol.ac.uk>
 #
@@ -19,6 +18,11 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# Make sure your sources include the headers as well as the C/C++ source
+# files, so they go into the distribution. If there are other files that are
+# needed, they should go in EXTRA_SOURCES.
 
 bin_PROGRAMS=sglib-listinsertsort
 sglib_listinsertsort_SOURCES=listinsertsort.c sglib.h

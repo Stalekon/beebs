@@ -2,8 +2,7 @@
 #
 # Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-# This file is part of the Bristol/Embecosm Embedded Benchmark Suite
-# Suite.
+# This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 #
 # Contributor: James Pallister <james.pallister@bristol.ac.uk>
 #
@@ -20,14 +19,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=bubblesort bubblesort_quick
+bin_PROGRAMS=bubblesort
 
 bubblesort_SOURCES=bubblesort.c
-bubblesort_quick_SOURCES=bubblesort.c
 
 include $(top_srcdir)/src/common.mk.am
 
-bubblesort_quick_CFLAGS=-DBUBBLESORT_RSHIFT=7 $(AM_CFLAGS)
-
 bubblesort_SOURCES += ${platform_src}
-bubblesort_quick_SOURCES += ${platform_src}
