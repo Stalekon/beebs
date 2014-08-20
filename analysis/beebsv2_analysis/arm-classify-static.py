@@ -5,121 +5,143 @@ import itertools
 
 directory = ''
 verbose = False
+static_analysis = False
+raw_data = False
+analysis = ''
+data_str = " Data"
 not_cat = 0
 
 for i,arg in enumerate(sys.argv):
-	if 		arg == "-v": verbose = True
-	elif arg == "-f":
+	if 		arg == "-v":
+		verbose = True
+	elif 	arg == "-s":
+		static_analysis = True
+		analysis = "Static"
+	elif 	arg == "-d":
+		static_analysis = False
+		analysis = "Dynamic"
+	elif 	arg == "-r":
+		raw_data = True
+		data_str = " Raw" + data_str
+	elif 	arg == "-f":
 		try:
 			directory = sys.argv[i+1]
 		except(IndexError):
 			directory = ''
 
-
 if directory == '': sys.exit("No file specified. Use '-f file' to specify a file")
+if 	analysis == '': sys.exit("No analysis type specified.\n" +
+ "Use -s to analyse output from 'avr-objdump -d --prefix-addresses'\n" \
+ "or -d to analyse output from 'simulavr -D -g' up to the halting loop")
 
-instruction_types = [None]*9
+static_analysis = True
 
-#Memory access instructions
-instruction_types[0] = [['adr', 'clrex', 'ldm', 'ldr', 'ldrd', 'ldrex', 'pop',
-'push', 'stm', 'str', 'strex','ldrb', 'strh', 'strb', 'ldrh', 'ldmdb','stmib',
-'stmia','stmdb', 'ldrsh', 'mov', 'movt', 'movw', 'movs', 'mvns', 'mvn'], 0,
-"Memory access instructions"]
+def printd(arg,test):
+	if (test): print arg
 
-#General data processing instructions
-instruction_types[1] = [['adc', 'add', 'addw', 'and', 'asr', 'bic', 'clz',
-'cmn', 'cmp', 'eor', 'lsl', 'lsr',  'orn', 'orr','rbit', 'rev', 'rev16',
-'revsh', 'ror', 'rrx', 'rsb','rsc', 'sadd16', 'sadd8', 'sasx', 'ssax', 'sbc',
-'shadd16', 'shadd8', 'shasx', 'shsax', 'shsub16', 'shsub8', 'ssub16', 'ssub8',
-'sub', 'subw', 'teq', 'tst', 'uadd16', 'uadd8', 'uasx', 'usax', 'uhadd16',
-'uhadd8', 'uhasx', 'uhsax', 'uhsub16', 'uhsub8', 'usad8','usada8', 'usub16',
-'usub8', 'adds', 'subs', 'orrs', 'lsrs', 'rsbs', 'ands', 'adcs', 'sbcs',
-'lsls', 'rrxs', 'asrs', 'bics', 'rscs'], 0,
-"General data processing instructions"]
+instruction_types = [None]*5
 
-#Multiply and divide instructions
-instruction_types[2] = [['mla', 'mls', 'mul', 'sdiv', 'smla', 'smlad,','smladx'
-'smlal', 'smlal', 'smlald','smlaldx' 'smlaw', 'smlsd', 'smlsld', 'smmla',
-'smmls','smmlsr', 'smuad','smuadx', 'smul', 'smmul', 'smmulr', 'smull',
-'smulwb','smulwt', 'smusd', 'smusdx', 'udiv', 'umaal', 'umlal', 'umull'], 0,
-"Multiply and divide instructions"]
+#alu
+instruction_types[0] = [["mov", "movs", "add", "adds", "adcs", "adr", "subs",
+"sub", "sbcs", "adc", "sbc", "rsbs", "muls", "cmp", "cmn", "ands", "eors",
+"orrs", "mvns", "bics", "tst", "lsls", "lsrs", "asrs", "rors", "sxth", "sxtb",
+"uxth", "uxtb", "rev", "rev16", "revsh"], 0,
+"ALU operations"]
 
-#Saturating instructions
-instruction_types[3] = [['ssat', 'ssat16', 'usat', 'usat16', 'qadd', 'qsub',
-'qsub16', 'qasx', 'qsax', 'qdadd', 'qdsub', 'uqadd16', 'uqadd8', 'uqasx',
-'uqsax', 'uqsub16', 'uqsub8'], 0,
-"Saturating instructions"]
+#register
+instruction_types[1] = [[], 0,
+"Data movement"]
 
-#Packing and unpacking instructions
-instruction_types[4] = [['pkh', 'sxtab', 'sxtab16', 'sxtah', 'sxtb', 'sxtb16',
-'sxth', 'uxtab', 'uxtab16', 'uxtah', 'uxtb', 'uxtb16', 'uxth'], 0,
-"Packing and unpacking instructions"]
+#memory
+instruction_types[2] = [["ldr", "ldrh", "ldrsh", "ldrsb", "ldm", "str",
+"strh", "strb", "stm", "push", "pop"], 0,
+"Memory"]
 
-#Bitfield instructions
-instruction_types[5] = [['bfc', 'bfi', 'sbfx', 'sxtb', 'sxth', 'ubfx', 'uxtb',
-'uxth'], 0,
-"Bitfield instructions"]
+#control flow
+instruction_types[3] = [["b", "beq", "bne", "bcs", "bcc", "bmi", "bpl",
+"bvs", "bvc", "bhi", "bls", "bge", "blt", "bgt", "ble", "bl", "bx", "blx"], 0,
+"Control Flow"]
 
-#Branch and control instructions
-instruction_types[6] = [['b', 'bl', 'blx', 'bx', 'cbnz', 'cbz', 'it', 'tbb',
-'tbh'], 0,
-"Branch and control instructions"]
-
-#Floating-point instructions
-instruction_types[7] = [['vabs', 'vadd', 'vcmp', 'vcmpe', 'vcvt',
-'vcvtr', 'vcvtb', 'vcvtt', 'vdiv', 'vfma', 'vfnma', 'vfms', 'vfnms',
-'vldm', 'vldr', 'vlma', 'vlms', 'vmov', 'vmrs', 'vmsr', 'vmul',
-'vneg', 'vnmla', 'vnmls', 'vnmul', 'vpop', 'vpush', 'vsqrt', 'vstm', 'vstr',
-'vsub'], 0,
-"Floating-point instructions"]
-
-#Miscellaneous instructions
-instruction_types[8] = [['bkpt', 'cpsid', 'cpsie', 'dmb', 'dsb', 'isb', 'mrs',
-'msr', 'nop', 'sev', 'svc', 'wfe', 'wfi'], 0,
-"Miscellaneous instructions"]
+#miscellaneous
+instruction_types[4] = [["svc", "cpsid", "cpsie", "mrs", "msr", "bkpt",
+"sev", "wfe", "wfi", "yeild", "nop", "isb", "dmb", "dsb"], 0,
+"Miscellaneous"]
 
 condition_siffixes = ['', 'eq', 'ne', 'cs', 'cc', 'mi', 'pl', 'vs', 'vc', 'hi',
 'ls', 'ge', 'lt', 'gt', 'le', 'al', 'hs', 'lo']
 
 lenght_suffixes = ['', '.n', '.w']
 
-suffix = [r[0]+r[1] for r in itertools.product(condition_siffixes, lenght_suffixes)]
+suffixes = [r[0]+r[1] for r in itertools.product(condition_siffixes, lenght_suffixes)]
+
+
+#A list where we put the instructions and their count
+#The format is ["instruction string", int(count)]
+instruction_pool = []
 
 try:
 	f = open(directory,'r')
 except(IOError):
-	sys.exit("Error opening file. Check if file exists.")
+	sys.exit("Error opening file. Check if file exists. " + directory)
 
 for line in f:
-	words = line.split()
-	try:
-		instruction = words[2]
-	except:
-		continue
+	if static_analysis:
+		if line[0] != '0':
+			continue
 
-	is_cathegorised = False
+		words = line.split()
 
-	for ins_type in instruction_types:
-		for element in ins_type[0]:
-			if (instruction.startswith(element) and
-				instruction[len(element):] in suffix):
-				ins_type[1]+=1
-				is_cathegorised = True
-				break
-			if (is_cathegorised): break
+		try:
+			instruction = words[2]
+		except:
+			continue
 
-	if (not is_cathegorised): not_cat+=1
+	else:
+		instruction = line.split()[3].lower()
 
-	if (not is_cathegorised and verbose):
-		print instruction + " was not categorised"
+		if (instruction == "cpu-waitstate"): continue
+
+	for existing_instruction in instruction_pool:
+		if (instruction == existing_instruction[0]):
+			existing_instruction[1]+=1
+			break
+	else:
+		new_instruction = [instruction, 1]
+		instruction_pool.append(new_instruction)
 
 f.close()
 
+instruction_pool.sort()
+
+for instruction in instruction_pool:
+	for ins_type in instruction_types:
+		for element in ins_type[0]:
+			if (instruction[0].startswith(element))	and\
+			(instruction[0][len(element):] in suffixes):
+				ins_type[1]+=instruction[1]
+				break
+		else:
+			continue
+		break
+	else:
+		not_cat+=1
+		printd(instruction[0] + " not categorised.", verbose)
+
+
+top_string = data_str + " from " + analysis + " Analysis "
+symbols_len = (52-len(top_string))/2
+
+print "#"*symbols_len + top_string + "#"*symbols_len
+
 print "/"+50*"="+"\\"
 
-for ins_type in instruction_types:
-	print ins_type[2] + ": " + str(ins_type[1])
+if (raw_data):
+	for ins in instruction_pool:
+		print '> ' + ins[0] + ": " + str(ins[1])
+else:
+	for ins_type in instruction_types:
+		print '> ' + ins_type[2] + ": " + str(ins_type[1])
 
-print "Number of segments not categorised: " + str(not_cat)
+	print "* Number of segments not categorised: " + str(not_cat)
 
 print "\\"+50*"="+"/"
