@@ -1,18 +1,35 @@
 import gcc
+import psutil
 
 debug = False
 verbose = False
 #verbose = True
 other_stats = True
 
-statements_pool = []
+#This retrieves a list with the names of the benchmarks being compiled,
+#it assumes that there is a gcc arguement such as "TEST_bench1 bench2 .. benchN"
+def get_benchmark_names():
+	pid = os.getpid()
+	p = psutil.Process(pid)
+	start_string = "TEST_"
+	for arg in p.cmdline():
+		if arg.startswith(start_string):
+			out = arg[len(start_string):].split(' ')
+			return out
 
-#
-src_file = gcc.get_dump_base_name().split(".")[0]
-
+#A debugging print
 def printd(arg,test):
 	if (test): print arg
 
+#Here I save the different types of statements and their count
+#as lists - [statment_string, count]
+statements_pool = []
+
+#This provides the name of the current source file being compiled
+src_file = gcc.get_dump_base_name().split(".")[0]
+
+
+#The gcc pass retrieving the data
 class ShowGimple(gcc.GimplePass):
 	def execute(self, fun):
 		if fun and fun.cfg:
@@ -45,6 +62,9 @@ class ShowGimple(gcc.GimplePass):
 						superclass = ""
 						printd("superclass", debug)
 
+					#This is the string of the statement
+					#It consists of gimple statement type,
+					#type of main expression and subtype of main expression
 					categ_str = superclass + stmt_type + stmt
 					printd(categ_str, debug)
 
