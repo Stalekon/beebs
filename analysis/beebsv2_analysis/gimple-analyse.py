@@ -6,7 +6,9 @@ verbose = False
 other_stats = True
 
 statements_pool = []
-src_file = ''
+
+#
+src_file = gcc.get_dump_base_name().split(".")[0]
 
 def printd(arg,test):
 	if (test): print arg
@@ -14,8 +16,6 @@ def printd(arg,test):
 class ShowGimple(gcc.GimplePass):
 	def execute(self, fun):
 		if fun and fun.cfg:
-			global src_file
-			src_file = fun.start.file.split("/")[-1].split(".")[0]
 			#printd("CONTROL FLOW GRAPH",debug)
 			blocks = fun.cfg.basic_blocks
 
@@ -63,7 +63,14 @@ def printout():
 	top_string = " Result from Gimple Tree Analysis "
 	ts_len = (52-len(top_string))/2
 
-	out = open(src_file + ".gimpdump",'w')
+	index = 0
+	fname = ''
+	while True :
+		fname = src_file + '[' + str(index) + ']' + ".gimpdump"
+		if os.path.isfile(fname): index += 1
+		else : break
+
+	out = open(fname,'a')
 
 	out.write("#"*ts_len + top_string + "#"*ts_len + "\n")
 
@@ -75,7 +82,7 @@ def printout():
 	out.write("\\"+50*"="+"/" + "\n")
 	out.close
 
-ps = ShowGimple(name='show-gimple')
+ps = ShowGimple(name='gimple-analysis')
 ps.register_after('ssa')
 
 gcc.register_callback(gcc.PLUGIN_FINISH,printout)
