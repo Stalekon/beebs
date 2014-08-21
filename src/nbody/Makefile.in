@@ -359,7 +359,7 @@ AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS) \
 		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
 		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
 		  "-DCALIB_SCALE=$(shell $(calib))" \
-                  "-DTEST_$(bin_PROGRAMS)" \
+                  "-DTEST_$(shell echo $(bin_PROGRAMS) | tr "-" "_")" \
 		  @CONFIG_CFLAGS@
 
 AM_LDFLAGS = @CONFIG_LDFLAGS@ "-lm"
