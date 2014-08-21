@@ -6,6 +6,7 @@ verbose = False
 #verbose = True
 other_stats = True
 
+#UNUSED BENCHMARKS WERE SPLIT BACK AGAIN
 #This retrieves a list with the names of the benchmarks being compiled,
 #it assumes that there is a gcc arguement such as "TEST_bench1 bench2 .. benchN"
 def get_benchmark_names():
@@ -27,7 +28,6 @@ statements_pool = []
 
 #This provides the name of the current source file being compiled
 src_file = gcc.get_dump_base_name().split(".")[0]
-
 
 #The gcc pass retrieving the data
 class ShowGimple(gcc.GimplePass):
@@ -84,13 +84,8 @@ def printout():
 	ts_len = (52-len(top_string))/2
 
 	index = 0
-	fname = ''
-	while True :
-		fname = src_file + '[' + str(index) + ']' + ".gimpdump"
-		if os.path.isfile(fname): index += 1
-		else : break
 
-	out = open(fname,'a')
+	out = open(src_file + ".gimpdump",'a')
 
 	out.write("#"*ts_len + top_string + "#"*ts_len + "\n")
 
