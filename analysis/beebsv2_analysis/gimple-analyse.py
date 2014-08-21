@@ -77,13 +77,10 @@ class ShowGimple(gcc.GimplePass):
 						statements_pool.append(new_stmt)
 
 def printout():
-
 	statements_pool.sort()
 
 	top_string = " Result from Gimple Tree Analysis "
 	ts_len = (52-len(top_string))/2
-
-	index = 0
 
 	out = open(src_file + ".gimpdump",'a')
 
