@@ -7,6 +7,6 @@ do
 	[ -d "${dir}" ] || continue
 	name="${dir##*/}"
 	#echo $dir
-	#mkdir ../../beebsv2-analysis-data/$name
-	cp $dir/*.gimpdump ../../beebsv2-analysis-data/$name/
+	mkdir ../../beebsv2-analysis-data/data2/$name
+	cp $dir/*.gimpdump ../../beebsv2-analysis-data/data2/$name/
 done

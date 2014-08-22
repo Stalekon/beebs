@@ -5,7 +5,7 @@
 
 build_dir=$PWD
 
-script=$build_dir/../analysis/beebsv2_analysis/gimple-analyse.py
+script=$build_dir/../beebsv2_analysis/gimple-analyse.py
 python_plugin_dir=$build_dir/../../gcc-python-plugin
 plugin=$python_plugin_dir/python.so
 
