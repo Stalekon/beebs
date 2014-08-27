@@ -13,6 +13,6 @@ do
 		dump_2=(${dump_1//'.'/ })
 		dump_name="${dump_2[0]}"
 		#echo $dir/${dump_name}
-		../analysis/beebsv2_analysis/avr-classify.py -f $dump -s > $dir/$dump_name.analysis.static
+		../beebsv2_analysis/avr-classify.py -f $dump -s > $dir/$dump_name.analysis.static
 	done
 done

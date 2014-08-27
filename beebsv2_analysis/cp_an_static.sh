@@ -8,5 +8,5 @@ do
 	name="${dir##*/}"
 	#echo $dir
 	#mkdir ../../beebsv2-analysis-data/$name
-	cp $dir/*.analysis.static ../../beebsv2-analysis-data/$name/
+	cp $dir/*.analysis.static ../../beebsv2-analysis-data/data2/$name/
 done
