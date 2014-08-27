@@ -7,12 +7,12 @@ do
 	[ -d "${dir}" ] || continue
 	name="${dir##*/}"
 	#echo $dir
-	for dump in $dir/*.dump.d
+	for dump in $dir/*.dump_*.d
 	do
 		dump_1="${dump##*/}"
 		dump_2=(${dump_1//'.'/ })
 		dump_name="${dump_2[0]}"
 		#echo $dir/${dump_name}
-		../beebsv2_analysis/avr-classify.py -f $dump -d > $dir/${dump_name}.analysis.dynamic.avr
+		cat $dump >> $dir/$dump_name.dump.d
 	done
 done
