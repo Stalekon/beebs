@@ -1,3 +1,6 @@
+#This script is used with the gcc-with-python plugin
+#in order to get the data of the IR after the SSA pass
+
 import gcc
 import psutil
 
