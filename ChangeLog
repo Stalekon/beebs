@@ -1,3 +1,105 @@
+2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
+	Updates to improve documentation generation.
+
+	* doc/texinfo.tex: Deleted.
+	* doc/beebs.texi: Place line break in long title.  Update email
+	address.  Remove comment about 'make check' not working.
+	* doc/beebs.info: Regenerate.
+	* doc/Makefile.in: Regenerated.
+
+2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
+	Remove benchmarks that are not licenced under GPL.
+
+	* configure.ac: Update to remove deleted benchmarks.
+	* configure: Regenerated.
+	* src/2dfir/Makefile.am: Deleted.
+	* src/2dfir/Makefile.in: Deleted.
+	* src/2dfir/fir2dim.c: Deleted.
+	* src/adpcm/Makefile.am: Deleted.
+	* src/adpcm/Makefile.in: Deleted.
+	* src/adpcm/adpcm.c: Deleted.
+	* src/blowfish/COPYRIGHT: Deleted.
+	* src/blowfish/LICENSE: Deleted.
+	* src/blowfish/Makefile.am: Deleted.
+	* src/blowfish/Makefile.in: Deleted.
+	* src/blowfish/bf.c: Deleted.
+	* src/blowfish/bf_cfb64.c: Deleted.
+	* src/blowfish/bf_enc.c: Deleted.
+	* src/blowfish/bf_locl.h: Deleted.
+	* src/blowfish/bf_pi.h: Deleted.
+	* src/blowfish/bf_skey.c: Deleted.
+	* src/blowfish/blowfish.h: Deleted.
+	* src/dhrystone/Makefile.am: Deleted.
+	* src/dhrystone/Makefile.in: Deleted.
+	* src/dhrystone/dhry.h: Deleted.
+	* src/dhrystone/dhry_1.c: Deleted.
+	* src/dhrystone/dhry_2.c: Deleted.
+	* src/fft/Makefile.am: Deleted.
+	* src/fft/Makefile.in: Deleted.
+	* src/fft/fft1.c: Deleted.
+	* src/lms/Makefile.am: Deleted.
+	* src/lms/Makefile.in: Deleted.
+	* src/lms/lms.c: Deleted.
+	* src/sha/Makefile.am: Deleted.
+	* src/sha/Makefile.in: Deleted.
+	* src/sha/sha.c: Deleted.
+	* src/sha/sha.h: Deleted.
+	* src/sha/sha_driver.c: Deleted.
+
+2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/platformcode/Makefile.am: Deleted.
+	* src/platformcode/Makefile.in: Deleted.
+	* src/platformcode/msp430.s: Deleted.
+	* src/platformcode/pic32mx.ld: Deleted.
+	* src/platformcode/pic32mx_startup.s: Deleted.
+	* src/platformcode/platformcode.c: Deleted.
+	* src/platformcode/platformcode.h: Deleted.
+	* src/platformcode/sam4lxplained.ld: Deleted.
+	* src/platformcode/startup.S: Deleted.
+	* src/platformcode/startup.c: Deleted.
+	* src/platformcode/stm32f05_flash.ld: Deleted.
+	* src/platformcode/stm32vl_flash.ld: Deleted.
+
+2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* tools/generate-benchmark.sh: Deleted.
+
+2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* run-all.sh: Deleted.
+
+2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
+	Update version string in preparation for release.
+
+	* configure.ac: Update version string.
+	* configure: Regenerate.
+	* doc/beebs.info: Regenerate.
+	* doc/version.texi: Regenerate.
+
+2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
+	Fix "make distcheck", include dejagnu library and clean up results
+	directory.
+
+	* Makefile.am (EXTRA_DIST): Add lib directory.
+	(distclean-local): New rule, cleanup results directory.
+	* Makefile.in: Regenerate.
+
+2014-09-01  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix the pin triggering on stm32f100 chip
+
+	* config/arm/chips/stm32f100/chipsupport.h: The pin initialisation was
+	    broken, not setting to output correctly.
+
+2014-08-29  James Pallister  <james.pallister@bristol.ac.uk>
+	Added GPL headers to some of the benchmarks for the WCET set.
+
+	* src/cnt/cnt.c: Added GPL header
+	* src/compress/compress.c: Added GPL header
+	* src/duff/duff.c: Added GPL header
+	* src/edn/edn.c: Added GPL header
+	* src/matmult/matmult.c: Added GPL header
+
 2014-08-28  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/qrduino/qrtest.c: Update GPL header to correct benchmark
@@ -182,7 +284,6 @@
 
 	* src/ctl-string/string.c: Cast the string to unsigned char.
 	* src/slre/slre.c: Cast to unsigned char.
->>>>>>> tjteru/master
 
 2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
 
