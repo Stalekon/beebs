@@ -1,0 +1,35 @@
+avr-objdump-all.sh - I made this script to go through the benchmark binaries and run 'avr-objdump -d --prefix-addresses' on them outputing in a *.dump.s file. I use this in other scripts.
+
+run-simulavr-all.sh - runs simulavr on all binaries and puts the trace in a *.dump.d file. This works by starting the simulation, putting the simulation in background, starting gdb with the binary as file input and finally killing the simulation once gdb is closed. This is done because, the simulation cannot stop on its own. At the end of every program is an infinite loop that signifies the end. In gdb I put a break point at stop_trigger() and then run it. Once the breakpoint is reached I exit gdb. This is the macro I use in gdb:
+define S
+        target remote :1212
+        break stop_trigger
+        load
+        c
+        q
+        y
+end
+
+Note: There is no way to detect benchmarks that don't behave nicely so this script must be supervised.
+
+avr-classify.py - Takes a files objdump as specified above or instruction trace from simulavr and and gets a count of all instructions.
+
+-f <file> is used to point to the file
+-s specifies that the input file is the objump of a binary, i. e. this is static analysis
+-d specifies that the input file is the simulavr trace, i. e. this is analysis of the execution (dynamic)
+-r tell the output to be "raw", i. e. it just gives a list of instructions and their count, without this flag the output is the count of predefined groups of instructions.
+
+avr-static-all.sh - Just runs 'avr-classify.py -s' on all objudmp generated from avr-objdump-all.sh . I didn't make a special script with -r because I can always edit it in this one.
+
+avr-dynamic-all.sh - Just runs 'avr-classify.py -d' on all simulavr traces generated during simulation . I didn't make a special script with -r because I can always edit it in this one.
+
+avr-dynamic-combine-all.sh - Simulavr generates multiple files based on the size of the trace. This script combines them in a single one. Used as preparation for avr-dynamic-all.sh
+
+gimple-analyse.py - This is the script used with the gcc-with-python plugin so it is dependent on it. It outputs carious data on the IR after the SSA flag.
+
+tree-analysis.sh - uses 'make' with the appropriate environmental variables and c flags to uses gimple-analyse.py with all benchmarks. Output is divided per source file and located in the benchmark build directory
+
+cp_* - script I used to copy the data outside of the BEEBS directory. Most likely useless to anyone else.
+
+arm-classify-static.py and msp430-classify-static.py - scripts similar to avr-classify.py that I made early on and never used. May not be working properly.
+
